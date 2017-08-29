@@ -32,14 +32,14 @@ FROM todos
 WHERE completed_at IS NULL
 GROUP BY priority;
 -- Write a SELECT statement to find the number of todos by priority created in the last 30 days.
-SELECT COUNT(priority), created_at
+SELECT COUNT(priority)
 FROM todos
 WHERE created_at < '2017/08/30'
-AND created_at > '2017/07/30'
-GROUP BY created_at;
+AND created_at > '2017/07/30';
 -- Write a SELECT statement to find the next todo you should work on. This is the todo with the highest priority that was created first. NOTE Completed
-SELECT MAX(priority), created_at
+SELECT MIN(created_at), priority
 FROM todos
 WHERE completed_at IS NULL
-GROUP BY created_at
+GROUP BY created_at, priority
+ORDER BY priority DESC
 LIMIT 1;
